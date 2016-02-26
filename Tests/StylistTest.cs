@@ -21,8 +21,7 @@ namespace HairSalon
     }
     public void Dispose()
     {
-      Restaurant.DeleteAll();
-      Cuisine.DeleteAll();
+      Stylist.DeleteAll();
     }
   }
 }

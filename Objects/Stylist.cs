@@ -57,7 +57,7 @@ namespace HairSalon
       {
         int stylistId = rdr.GetInt32(0);
         string stylistName = rdr.GetString(1);
-        Stylist newStylist = new Sylist(stylistName, stylistId);
+        Stylist newStylist = new Stylist(stylistName, stylistId);
         allStylists.Add(newStylist);
       }
 
@@ -69,7 +69,40 @@ namespace HairSalon
       {
         conn.Close();
       }
+      return allStylists;
     }
-    
+
+    public void Save()
+    {
+      SqlConnection conn = DB.Connection();
+      SqlDataReader rdr;
+      conn.Open();
+
+      SqlCommand cmd = new SqlComman("INSERT INTO stylist (name) OUTPUT INSERTED.id VALUES (@stylistName);", conn);
+
+      SqlParameter nameParameter = new SqlParameter();
+      nameParameter.ParameterName = "@StylistName";
+      nameParameter.Value = this.GetName();
+      cmd.Parameters.Add(nameParameter);
+      rdr = cmd.ExecuteReader();
+
+      while(rdr.Read())
+      {
+        this._id = rdr.GetInt32(0);
+      }
+      if(rdr != null)
+      {
+        rdr.Close();
+      }
+      if(conn != null)
+      {
+        conn.Close();
+      }
+    }
+
+    public static void DeleteAll()
+    {
+      SqlCo
+    }
   }
 }
