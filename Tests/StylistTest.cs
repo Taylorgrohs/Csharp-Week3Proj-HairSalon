@@ -105,6 +105,7 @@ namespace HairSalon
     public void Dispose()
     {
       Stylist.DeleteAll();
+      Client.DeleteAll();
     }
   }
 }
