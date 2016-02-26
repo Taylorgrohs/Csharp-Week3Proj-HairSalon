@@ -15,20 +15,20 @@ namespace HairSalon
       _name = Name;
     }
 
-    public override bool Equal(System.Object otherStylist)
-    {
-      if(!(otherStylist is Stylist))
-      {
-        return false;
-      }
-      else
-      {
-        Stylist newStylist = (Stylist) otherStylist;
-        bool idEquality = this.GetId() == newStylist.GetId();
-        bool nameEquality = this.GetName() == newStylist.GetName();
-        return (idEquality && nameEquality);
-      }
-    }
+    // public override bool Equal(System.Object otherStylist)
+    // {
+    //   if(!(otherStylist is Stylist))
+    //   {
+    //     return false;
+    //   }
+    //   else
+    //   {
+    //     Stylist newStylist = (Stylist) otherStylist;
+    //     bool idEquality = this.GetId() == newStylist.GetId();
+    //     bool nameEquality = this.GetName() == newStylist.GetName();
+    //     return (idEquality && nameEquality);
+    //   }
+    // }
 
     public int GetId()
     {
@@ -78,7 +78,7 @@ namespace HairSalon
       SqlDataReader rdr;
       conn.Open();
 
-      SqlCommand cmd = new SqlComman("INSERT INTO stylist (name) OUTPUT INSERTED.id VALUES (@stylistName);", conn);
+      SqlCommand cmd = new SqlCommand("INSERT INTO stylist (name) OUTPUT INSERTED.id VALUES (@stylistName);", conn);
 
       SqlParameter nameParameter = new SqlParameter();
       nameParameter.ParameterName = "@StylistName";
@@ -102,7 +102,10 @@ namespace HairSalon
 
     public static void DeleteAll()
     {
-      SqlCo
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+      SqlCommand cmd = new SqlCommand("DELETE FROM stylist;", conn);
+      cmd.ExecuteNonQuery();
     }
   }
 }
