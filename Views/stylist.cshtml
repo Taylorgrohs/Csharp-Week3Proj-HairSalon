@@ -1,10 +1,25 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Best Restaurants</title>
+    <title>Hair Salon</title>
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
   </head>
   <body>
-
+    <h2>Here are all the clients seeing this stylist</h2>
+    @if (@Model["clients"].Count == 0)
+    {
+      <p>No clients have been added yet!</p>
+    }
+    else
+    {
+      <ol>
+        @foreach (var client in @Model["clients"])
+        {
+           <li>@client.GetName() <a href="/client/edit/@client.GetId()">Edit</a> | <a href="/client/delete/@client.GetId()">Delete</a></li>
+        }
+      </ol>
+    }
+    <p><a href="/clients/new">Add a new Client</a></p>
+    <p><a href="/">Home</a></p>
   </body>
 </html>

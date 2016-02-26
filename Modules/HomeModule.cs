@@ -58,7 +58,7 @@ namespace HairSalon
       {
         Stylist selectedStylist = Stylist.Find(parameters.id);
         selectedStylist.Update(Request.Form["stylist-name"]);
-        return View["sucess.cshtml"];
+        return View["success.cshtml"];
       };
 
       Get["stylist/delete/{id}"] = parameters =>
@@ -108,7 +108,7 @@ namespace HairSalon
         Client selectedClient = Client.Find(parameters.id);
         return View["client_delete.cshtml", selectedClient];
       };
-      Delete["/client/delete{id}"] = parameters =>
+      Delete["/client/delete/{id}"] = parameters =>
       {
         Client selectedClient = Client.Find(parameters.id);
         selectedClient.Delete();
