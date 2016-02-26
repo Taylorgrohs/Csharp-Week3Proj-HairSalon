@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hair Salon</title>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
+  </head>
+  <body>
+    <h1>Add a new Client</h1>
+    <form action="/clients/new" method="post">
+      <label for="client-name">Client Name</label>
+      <input type="text" name="client-name">
+
+      <select name="stylist-id">
+        @foreach(var stylist in Model)
+        {
+          <option value="@stylist.GetId()">@stylist.GetName()</option>
+        }
+      </select>
+      <button type="submit">Add new Client</button>
+    </form>
+    <p><a href="/">Home</a></p>
+    <p><a href="/clients">View all clients</a></p>
+  </body>
+</html>

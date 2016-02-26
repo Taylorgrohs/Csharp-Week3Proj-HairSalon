@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hair Salon</title>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
+  </head>
+  <body>
+    <h1>Hair Salon</h1>
+    <hr/>
+    <h2>Edit Client: @Model.GetName()</h2>
+    <form action="/client/edit/@Model.GetId()" method="post">
+      <input type="hidden" name="_method" value="PATCH">
+      <label for="client-name">Client Name</label>
+      <input type="text" name="client-name">
+      <button type="submit">Update</button>
+    </form>
+    <h4><a href="/">Home</a></h4>
+  </body>
+</html>
