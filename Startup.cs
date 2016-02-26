@@ -5,7 +5,7 @@ using Nancy;
 using Nancy.ViewEngines.Razor;
 using System.Collections.Generic;
 
-namespace BestRestaurant
+namespace HairSalon
 {
   public class Startup
   {
