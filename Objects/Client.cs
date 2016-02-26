@@ -20,6 +20,18 @@ namespace HairSalon
     {
       return _id;
     }
+    public override bool Equals(System.Object otherClient)
+    {
+      if (!(otherClient is Client))
+     {
+       return false;
+     }
+     else
+     {
+       Client newClient = (Client) otherClient;
+       return this.GetName().Equals(newClient.GetName());
+     }
+    }
     public string GetName()
     {
       return _name;
@@ -42,7 +54,7 @@ namespace HairSalon
 
       SqlConnection conn = DB.Connection();
       SqlDataReader rdr = null;
-      conn.Open;
+      conn.Open();
 
       SqlCommand cmd = new SqlCommand("SELECT * FROM client;", conn);
       rdr = cmd.ExecuteReader();
@@ -145,7 +157,7 @@ namespace HairSalon
 
       SqlCommand cmd = new SqlCommand("UPDATE client SET name = @newName OUTPUT INSERTED.name WHERE id = @clientId;", conn);
 
-      SqlParameters newNameParameter = new SqlParameter();
+      SqlParameter newNameParameter = new SqlParameter();
       newNameParameter.ParameterName = "@newName";
       newNameParameter.Value = newName;
       cmd.Parameters.Add(newNameParameter);
@@ -158,7 +170,7 @@ namespace HairSalon
 
       while(rdr.Read())
       {
-        this._description = rdr.GetString(0);
+        this._name = rdr.GetString(0);
       }
       if(rdr != null)
       {
@@ -170,6 +182,13 @@ namespace HairSalon
       }
     }
 
+    public static void DeleteAll()
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+      SqlCommand cmd = new SqlCommand("DELETE FROM client;", conn);
+      cmd.ExecuteNonQuery();
+    }
     public void Delete()
     {
       SqlConnection conn = DB.Connection();
